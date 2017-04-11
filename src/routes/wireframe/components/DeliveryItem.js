@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Col, Card, Button, Upload, Icon} from 'antd';
-
+import { config } from '../../../utils'
 export default class DeliveryItem extends React.Component {
   render() {
     const tabStyle = {
@@ -23,7 +23,8 @@ export default class DeliveryItem extends React.Component {
       borderWidth: '1px',
       borderColor: '#ddd',
       borderStyle: 'solid',
-      background:'#fff'
+      background:'#fff',
+      padding: '20px'
     }
     const props = {
       name: 'file',
@@ -59,8 +60,10 @@ export default class DeliveryItem extends React.Component {
             <div className="input-wrapper" style={{width:'30%'}}>
               <Upload {...props}>
                 <p>
-                  <Icon type="upload" style={icon}/>
-                  <p>Placeholder</p>
+                  <img src={config.imgDefault} alt="" style={{height: '90px'}}/>
+                  <Button type='primary'>
+                    Download
+                  </Button>
                 </p>
               </Upload>
             </div>

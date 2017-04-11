@@ -36,7 +36,7 @@ export default class WireFrame extends React.Component {
       marginRight: '5px!important'
     }
     const listWrapper = {
-      height: '400px',
+      height: '455px',
       overflowY: 'auto'
     }
 

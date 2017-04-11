@@ -16,7 +16,8 @@ export default class OrderItem extends React.Component {
     const wrapper = {
       borderWidth: '1px',
       borderColor: '#ddd',
-      borderStyle: 'solid'
+      borderStyle: 'solid',
+      padding: '20px'
     }
     return(
       <div className="order-wrapper" style={wrapper}>
