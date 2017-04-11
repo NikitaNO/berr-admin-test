@@ -1,5 +1,5 @@
 import React from 'react';
-import {Row, Col, Card, Button} from 'antd';
+import {Row, Col, Card, Button, Upload, Icon} from 'antd';
 
 export default class DeliveryItem extends React.Component {
   render() {
@@ -7,11 +7,46 @@ export default class DeliveryItem extends React.Component {
       display: 'flex',
       justifyContent: 'space-between',
     }
+    const title = {
+      color: '#0e77ca',
+      textTransform: 'uppercase',
+      fontSize: '16px',
+      marginBottom: '5px'
+    }
+    const icon = {
+      fontSize: '25px',
+      marginTop: '10px',
+      marginBottom: '10px',
+      display: 'block'
+    }
+    const wrapper = {
+      borderWidth: '1px',
+      borderColor: '#ddd',
+      borderStyle: 'solid',
+      background:'#fff'
+    }
+    const props = {
+      name: 'file',
+      action: '/upload.do',
+      headers: {
+        authorization: 'authorization-text'
+      },
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      }
+    };
     return(
-      <div className="order-wrapper">
+      <div className="order-wrapper" style={wrapper}>
         <div className="header-wrapper" style={tabStyle}>
           <div className="title">
-            <p>12</p>
+            <p style={title}>12</p>
             <span>Lorem Ipsum</span>
           </div>
           <div className="buttons-wrapper">
@@ -22,28 +57,33 @@ export default class DeliveryItem extends React.Component {
         </div>
           <div className="delivery-wrapper" style={{display:'flex'}}>
             <div className="input-wrapper" style={{width:'30%'}}>
-              <p>Download</p>
+              <Upload {...props}>
+                <p>
+                  <Icon type="upload" style={icon}/>
+                  <p>Placeholder</p>
+                </p>
+              </Upload>
             </div>
             <div className="list-delivery" style={{width:'70%'}}>
-              <div>
-                <span>Type</span>
-                <span>Type A</span>
+              <div style={tabStyle}>
+                <span style={{width:'20%', color: '#aaa'}}>Type</span>
+                <span style={{width:'80%'}}>Type A</span>
               </div>
-              <div>
-                <span>Format</span>
-                <span>Format A</span>
+              <div style={tabStyle}>
+                <span style={{width:'20%', color: '#aaa'}}>Format</span>
+                <span style={{width:'80%'}}>Format A</span>
               </div>
-              <div>
-                <span>Quality</span>
-                <span>Quality A</span>
+              <div style={tabStyle}>
+                <span style={{width:'20%', color: '#aaa'}}>Quality</span>
+                <span style={{width:'80%'}}>Quality A</span>
               </div>
-              <div>
-                <span>Content</span>
-                <span>lorem ipsum</span>
+              <div style={tabStyle}>
+                <span style={{width:'20%', color: '#aaa'}}>Content</span>
+                <span style={{width:'80%'}}>lorem ipsum</span>
               </div>
-              <div>
-                <span>Delivered</span>
-                <span>MM:DD:hh:mm:ss</span>
+              <div style={tabStyle}>
+                <span style={{width:'20%', color: '#aaa'}}>Delivered</span>
+                <span style={{width:'80%'}}>MM:DD:hh:mm:ss</span>
               </div>
             </div>
           </div>

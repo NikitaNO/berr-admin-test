@@ -34,7 +34,12 @@ export default class WireFrame extends React.Component {
     }
 
     const tabStyle = {
-      marginRight: '5px!important'
+      marginRight: '5px!important',
+    }
+
+    const listWrapper = {
+      height: '400px',
+      overflowY: 'auto'
     }
 
     const TabPane = Tabs.TabPane;
@@ -56,7 +61,9 @@ export default class WireFrame extends React.Component {
             <div className="tabs-wrapper">
               <Tabs defaultActiveKey="1">
                 <TabPane style = {tabStyle} tab="New/Pending (5)" key="1">
-                  {items}
+                  <div style={listWrapper}>
+                    {items}
+                  </div>
                 </TabPane>
                 <TabPane style = {tabStyle} tab="Accepted (4)" key="2">
                   Accepted

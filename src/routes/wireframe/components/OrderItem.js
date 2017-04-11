@@ -13,8 +13,13 @@ export default class OrderItem extends React.Component {
       fontSize: '16px',
       marginBottom: '5px'
     }
+    const wrapper = {
+      borderWidth: '1px',
+      borderColor: '#ddd',
+      borderStyle: 'solid'
+    }
     return(
-      <div className="order-wrapper">
+      <div className="order-wrapper" style={wrapper}>
         <div className="header-wrapper" style={tabStyle}>
           <div className="title">
             <p style={title}>{this.props.title}</p>

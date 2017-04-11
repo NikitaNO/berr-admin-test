@@ -58,6 +58,10 @@ function Header({
     borderRightStyle: 'solid'
   }
 
+  const items = {
+    fontSize: '14px'
+  }
+
   return (
     <div className={styles.header}>
       <div style={flexWrapper}>
@@ -68,20 +72,20 @@ function Header({
         <div>
           <Menu className='header-menu' mode='horizontal' onClick={handleClickMenu}>
             {/*title={<span> <Icon type="user"/>John Doe </span>}>*/}
-            <Menu.Item key="profile">
+            <Menu.Item key="profile" style={items}>
               <p>Welcome,
                 <span> <Icon type="user"/>John Doe </span>
               </p>
             </Menu.Item>
-            <Menu.Item key='notification'>
+            <Menu.Item key='notification' style={items}>
               <span>
                 <Badge count={5}>
                   <Icon type="notification"/>
                 </Badge>
               </span>
             </Menu.Item>
-            <Menu.Item key="profile" > <a href="#/pages/profile"  rel="noopener noreferrer">Profile</a></Menu.Item>
-            <Menu.Item key='logout'>
+            <Menu.Item style={items} key="profile" > <a href="#/pages/profile"  rel="noopener noreferrer">Profile</a></Menu.Item>
+            <Menu.Item style={items} key='logout'>
               <a>Logout</a>
             </Menu.Item>
           </Menu>

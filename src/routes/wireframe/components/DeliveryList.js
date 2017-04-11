@@ -35,6 +35,10 @@ export default class WireFrame extends React.Component {
     const tabStyle = {
       marginRight: '5px!important'
     }
+    const listWrapper = {
+      height: '400px',
+      overflowY: 'auto'
+    }
 
 
     const TabPane = Tabs.TabPane;
@@ -50,7 +54,7 @@ export default class WireFrame extends React.Component {
             <div style={flexWrapper}>
               <h1>Deliverables Awaiting Conformation (4)</h1>
             </div>
-            <div className="tabs-wrapper">
+            <div style={listWrapper}>
               {items}
             </div>
           </div>
