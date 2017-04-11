@@ -23,7 +23,7 @@ export default class OrderItem extends React.Component {
       <div className="order-wrapper" style={wrapper}>
         <div className="header-wrapper" style={tabStyle}>
           <div className="title">
-            <p style={title}>{this.props.title}</p>
+            <a style={title}>{this.props.title}</a>
             <span>Lorem Ipsum</span>
           </div>
           <div className="buttons-wrapper">

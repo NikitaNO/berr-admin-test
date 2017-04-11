@@ -47,7 +47,7 @@ export default class DeliveryItem extends React.Component {
       <div className="order-wrapper" style={wrapper}>
         <div className="header-wrapper" style={tabStyle}>
           <div className="title">
-            <p style={title}>12</p>
+            <a style={title}>12</a>
             <span>Lorem Ipsum</span>
           </div>
           <div className="buttons-wrapper">
@@ -61,7 +61,7 @@ export default class DeliveryItem extends React.Component {
               <Upload {...props}>
                 <p>
                   <img src={config.imgDefault} alt="" style={{height: '90px'}}/>
-                  <Button type='primary'>
+                  <Button type='primary' style={{display: 'block'}}>
                     Download
                   </Button>
                 </p>
