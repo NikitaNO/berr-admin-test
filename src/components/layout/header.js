@@ -36,6 +36,7 @@ function Header({
     boxShadow: '2px 3px 20px 0px rgba(0,0,0,0.75);',
     padding: '5px 50px',
     margin: '10px',
+    marginLeft: '50px',
     borderWidth: '2px',
     borderColor: '#ddd',
     borderStyle: 'solid'
@@ -43,14 +44,14 @@ function Header({
 
   const textStyleLogo = {
     fontSize: '14px',
+    top: '3px',
     textTransform: 'uppercase'
   }
 
   const flexWrapper = {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    background: '#ffffff'
+    alignItems: 'center'
   }
 
   const menuItem = {
@@ -64,13 +65,32 @@ function Header({
 
   return (
     <div className={styles.header}>
+      {isNavbar ?
+        <Popover
+          placement='bottomLeft'
+          onVisibleChange={switchMenuPopover}
+          visible={menuPopoverVisible}
+          overlayClassName={styles.popovermenu + ' deneme' }
+          trigger='click'
+          content={
+            <Menus {...menusProps} />
+          }>
+        <div className={styles.siderbutton}>
+          <Icon type='bars'/>
+        </div>
+      </Popover>
+          : <div className={styles.siderbutton} onClick={switchSider}>
+        <Icon type={siderFold
+            ? 'menu-unfold'
+            : 'menu-fold'}/>
+      </div>}
       <div style={flexWrapper}>
         <Logo
           style={wrapperStyleLogo}
           textStyleLogo={textStyleLogo}
         />
         <div>
-          <Menu className='header-menu' mode='horizontal' onClick={handleClickMenu}>
+          <Menu style ={{marginBottom: '0px', background: 'transparent'}} className='header-menu' mode='horizontal' onClick={handleClickMenu}>
             {/*title={<span> <Icon type="user"/>John Doe </span>}>*/}
             <Menu.Item key="profile" style={items}>
               <p>Welcome,

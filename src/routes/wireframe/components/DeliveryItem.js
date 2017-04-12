@@ -1,54 +1,58 @@
 import React from 'react';
 import {Row, Col, Card, Button, Upload, Icon} from 'antd';
-import { config } from '../../../utils'
+import { config } from '../../../utils';
+import styles from '../assets/styles';
+import data from '../assets/data';
+
 export default class DeliveryItem extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false,
+      imgSrc: config.imgDefault
+    }
+    this.toggleHover = this.toggleHover.bind(this)
+  }
+
+  toggleHover() {
+    this.setState({hover: !this.state.hover})
+  }
+
+  onChange(info) {
+    this.setState({imgSrc: window.URL.createObjectURL(info.file.originFileObj)})
+  }
+
   render() {
-    const tabStyle = {
-      display: 'flex',
-      justifyContent: 'space-between',
+
+    let linkStyle;
+    if (this.state.hover) {
+      linkStyle = styles.titleHover
+    } else {
+      linkStyle = styles.title
     }
-    const title = {
-      color: '#0e77ca',
-      textTransform: 'uppercase',
-      fontSize: '16px',
-      marginBottom: '5px'
-    }
-    const icon = {
-      fontSize: '25px',
-      marginTop: '10px',
-      marginBottom: '10px',
-      display: 'block'
-    }
-    const wrapper = {
-      borderWidth: '1px',
-      borderColor: '#ddd',
-      borderStyle: 'solid',
-      background:'#fff',
-      padding: '20px'
-    }
+
     const props = {
       name: 'file',
       action: '/upload.do',
       headers: {
         authorization: 'authorization-text'
       },
-      onChange(info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      }
     };
+
+    const tableColumns = data.tableDelivery.map((item,i)=>
+      <div style={styles.tabStyle}>
+        <span style={styles.leftDelivery}>{item.cat}</span>
+        <span style={styles.rightDelivery}>{item.value}</span>
+      </div>
+    );
+
     return(
-      <div className="order-wrapper" style={wrapper}>
-        <div className="header-wrapper" style={tabStyle}>
+      <div className="order-wrapper" style={styles.wrapper}>
+        <div className="header-wrapper" style={styles.headerTabStyle}>
           <div className="title">
-            <p style={title}>12</p>
-            <span>Lorem Ipsum</span>
+            <a onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} style={linkStyle}>12</a>
+            <span>{data.deliveryDescr}</span>
           </div>
           <div className="buttons-wrapper">
             <Button type="primary">Confirm</Button>
@@ -58,36 +62,17 @@ export default class DeliveryItem extends React.Component {
         </div>
           <div className="delivery-wrapper" style={{display:'flex'}}>
             <div className="input-wrapper" style={{width:'30%'}}>
-              <Upload {...props}>
+              <Upload {...props} onChange={event => this.onChange(event)}>
                 <p>
-                  <img src={config.imgDefault} alt="" style={{height: '90px'}}/>
-                  <Button type='primary'>
+                  <img src={this.state.imgSrc} alt="" style={{height: '90px'}}/>
+                  <Button type='primary' style={{display: 'block'}}>
                     Download
                   </Button>
                 </p>
               </Upload>
             </div>
             <div className="list-delivery" style={{width:'70%'}}>
-              <div style={tabStyle}>
-                <span style={{width:'20%', color: '#aaa'}}>Type</span>
-                <span style={{width:'80%'}}>Type A</span>
-              </div>
-              <div style={tabStyle}>
-                <span style={{width:'20%', color: '#aaa'}}>Format</span>
-                <span style={{width:'80%'}}>Format A</span>
-              </div>
-              <div style={tabStyle}>
-                <span style={{width:'20%', color: '#aaa'}}>Quality</span>
-                <span style={{width:'80%'}}>Quality A</span>
-              </div>
-              <div style={tabStyle}>
-                <span style={{width:'20%', color: '#aaa'}}>Content</span>
-                <span style={{width:'80%'}}>lorem ipsum</span>
-              </div>
-              <div style={tabStyle}>
-                <span style={{width:'20%', color: '#aaa'}}>Delivered</span>
-                <span style={{width:'80%'}}>MM:DD:hh:mm:ss</span>
-              </div>
+              {tableColumns}
             </div>
           </div>
         </div>

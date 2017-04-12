@@ -1,50 +1,14 @@
 import React from 'react';
 import {Row, Col, Card, Button, Tabs} from 'antd';
 import OrderItem from './OrderItem';
+import styles from '../assets/styles';
+import data from '../assets/data';
+
 export default class WireFrame extends React.Component {
   render() {
-
-    const itemsList = [
-      {
-        title:'A1',
-        style: ''
-      },
-      {
-        title:'A2',
-        style: ''
-      },
-      {
-        title:'A3',
-        style: ''
-      },
-      {
-        title:'A4',
-        style: ''
-      },
-      {
-        title:'A5',
-        style: ''
-      }
-    ]
-
-    const flexWrapper = {
-      display: 'flex',
-      justifyContent: 'space-between',
-      marginBottom: '20px'
-    }
-
-    const tabStyle = {
-      marginRight: '5px!important',
-    }
-
-    const listWrapper = {
-      height: '400px',
-      overflowY: 'auto'
-    }
-
     const TabPane = Tabs.TabPane;
 
-    const items = itemsList.map((item,i)=>
+    const items = data.itemsOrder.map((item,i)=>
       <OrderItem
         key={i}
         title={item.title}
@@ -54,24 +18,24 @@ export default class WireFrame extends React.Component {
 
     return(
           <div className="list-wrapper">
-            <div style={flexWrapper}>
+            <div style={styles.flexWrapper}>
               <h1>My orders</h1>
               <Button type="primary">+ CREATE ORDER</Button>
             </div>
             <div className="tabs-wrapper">
               <Tabs defaultActiveKey="1">
-                <TabPane style = {tabStyle} tab="New/Pending (5)" key="1">
-                  <div style={listWrapper}>
+                <TabPane style = {styles.tabStyleOrder} tab="New/Pending (5)" key="1">
+                  <div style={styles.listWrapperOrder}>
                     {items}
                   </div>
                 </TabPane>
-                <TabPane style = {tabStyle} tab="Accepted (4)" key="2">
+                <TabPane style = {styles.tabStyleOrder} tab="Accepted (4)" key="2">
                   Accepted
                 </TabPane>
-                <TabPane style = {tabStyle} tab="Rejected (3)" key="3">
+                <TabPane style = {styles.tabStyleOrder} tab="Rejected (3)" key="3">
                   Rejected
                 </TabPane>
-                <TabPane style = {tabStyle} tab="In Progress (2)" key="4">
+                <TabPane style = {styles.tabStyleOrder} tab="In Progress (2)" key="4">
                   In Progress
                 </TabPane>
               </Tabs>

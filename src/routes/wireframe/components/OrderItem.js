@@ -1,29 +1,49 @@
 import React from 'react';
 import {Row, Col, Card, Button} from 'antd';
+import styles from '../assets/styles';
+import data from '../assets/data';
 
 export default class OrderItem extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      hover: false
+    }
+    this.toggleHover = this.toggleHover.bind(this)
+  }
+
+  toggleHover() {
+    this.setState({hover: !this.state.hover})
+  }
+
   render() {
-    const tabStyle = {
-      display: 'flex',
-      justifyContent: 'space-between',
+
+    let linkStyle;
+    if (this.state.hover) {
+      linkStyle = styles.titleHover
+    } else {
+      linkStyle = styles.title
     }
-    const title = {
-      color: '#0e77ca',
-      textTransform: 'uppercase',
-      fontSize: '16px',
-      marginBottom: '5px'
-    }
-    const wrapper = {
-      borderWidth: '1px',
-      borderColor: '#ddd',
-      borderStyle: 'solid',
-      padding: '20px'
-    }
+    const firstColumn = data.orderTableFirst.map((item,i)=>
+      <div className="my-row">
+        <p style={{color: '#aaa'}}>{item.cat}</p>
+        <span>{item.value}</span>
+      </div>
+    );
+
+    const secondColumn = data.orderTableSecond.map((item,i)=>
+      <div className="my-row">
+        <p style={{color: '#aaa'}}>{item.cat}</p>
+        <span>{item.value}</span>
+      </div>
+    );
+
     return(
-      <div className="order-wrapper" style={wrapper}>
-        <div className="header-wrapper" style={tabStyle}>
+      <div className="order-wrapper" style={styles.wrapperOrders}>
+        <div className="header-wrapper" style={styles.headerTabStyle}>
           <div className="title">
-            <p style={title}>{this.props.title}</p>
+            <a onMouseEnter={this.toggleHover} onMouseLeave={this.toggleHover} style={linkStyle}>{this.props.title}</a>
             <span>Lorem Ipsum</span>
           </div>
           <div className="buttons-wrapper">
@@ -32,37 +52,23 @@ export default class OrderItem extends React.Component {
             <Button type="primary">Primary</Button>
           </div>
         </div>
-        <div className="table-wrapper" style={tabStyle}>
+        <div className="table-wrapper" style={styles.tabStyle}>
+          <div className="my-column">
+            {firstColumn}
+          </div>
+          <div className="my-column">
+            {secondColumn}
+          </div>
           <div className="my-column">
             <div className="my-row">
-              <p>Service Provider</p>
-              <span>Lorem ipsum</span>
-            </div>
-            <div className="my-row">
-              <p>Service Category</p>
-              <span>Lorem ipsum</span>
+              <p style={{color: '#aaa'}}>{data.orderTableThird.cat}</p>
+              <span>{data.orderTableThird.value}</span>
             </div>
           </div>
           <div className="my-column">
             <div className="my-row">
-              <p>Service Period</p>
-              <span>Lorem ipsum</span>
-            </div>
-            <div className="my-row">
-              <p>Location</p>
-              <span>Lorem ipsum sada</span>
-            </div>
-          </div>
-          <div className="my-column">
-            <div className="my-row">
-              <p>Payment</p>
-              <span>$999</span>
-            </div>
-          </div>
-          <div className="my-column">
-            <div className="my-row">
-              <p>Status</p>
-              <span>Draft</span>
+              <p style={{color: '#aaa'}}>{data.orderTableFourth.cat}</p>
+              <span>{data.orderTableFourth.value}</span>
             </div>
           </div>
         </div>
